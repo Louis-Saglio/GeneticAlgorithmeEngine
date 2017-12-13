@@ -1,5 +1,5 @@
 from src.core.interfaces import Environment
-from src.core.samples import Population
+from src.core.samples import Population, ResultSet
 
 
 # noinspection PyMethodMayBeStatic,PyUnusedLocal
@@ -8,10 +8,15 @@ class Engine:
     def __init__(self):
         self.environment: Environment = None
         self.population: Population = None
-        self.nbr_individu: int = None
+        self.population_size: int = None
         self.mutation_probability: float = None
         self.retained_pct: float = None
         self.generation_nbr: int = None
+
+    def make_population(self):
+        assert issubclass(self.environment.__class__, Environment)
+        assert self.population_size >= 0
+        self.population = Population(self.population_size, self.environment)
 
     def run(self):
         for i in range(self.generation_nbr):
@@ -20,6 +25,13 @@ class Engine:
             self.population.generate()
             self.population.mutate(self.mutation_probability)
             self.population.select(self.retained_pct)
+            print(ResultSet(
+                **self.__dict__,
+                mean=self.population.mean,
+                best=self.environment.get_grade(self.population.best),
+                generation_num=i
+            ))
+            # print(self.environment.get_grade(self.population.best))
             if self.end_stop_condition(i):
                 break
 

@@ -1,6 +1,8 @@
 import random
 from copy import copy
 
+from src.utils.utils import print_float
+
 
 class Individu:
     def __init__(self, chromosomes):
@@ -67,10 +69,17 @@ class Population:
 
 
 class ResultSet:
-        def __init__(self, mutation_probability, conserved_pct, mean, best, population_size, generation_nbr):
-            self.pop = population_size
-            self.best = best
-            self.moyenne = mean
-            self.conserve = conserved_pct
-            self.mutation = mutation_probability
-            self.nbr_gen = generation_nbr
+    def __init__(self, **kwargs):
+        self.pop = kwargs["population_size"]
+        self.best = print_float(kwargs["best"], 7)
+        self.moyenne = print_float(kwargs["mean"], 7)
+        self.conserve = print_float(float(kwargs["retained_pct"]), 4) + '%'
+        self.mutation = print_float(float(kwargs["mutation_probability"]) * 100, 4) + '%'
+        self.nbr_gen = kwargs["generation_nbr"]
+        self.generation_num = kwargs["generation_num"]
+
+    def __repr__(self):
+        rep = str()
+        for value in self.__dict__.values():
+            rep += f"{value}\t"
+        return rep

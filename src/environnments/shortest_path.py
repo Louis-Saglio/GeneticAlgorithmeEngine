@@ -44,7 +44,7 @@ class Map(set):
         return Path(random.sample(self, len(self)))
 
 
-class CustomEnv(Environment):
+class ShortestPathEnv(Environment):
 
     def __init__(self, map_: Map):
         self.map = map_
