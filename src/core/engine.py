@@ -12,6 +12,8 @@ class Engine:
         self.mutation_probability: float = None
         self.retained_pct: float = None
         self.generation_nbr: int = None
+        self.begining_stop_condition = lambda i, result_set: False
+        self.end_stop_condition = lambda i, result_set: False
 
     def make_population(self):
         assert issubclass(self.environment.__class__, Environment)
@@ -19,24 +21,16 @@ class Engine:
         self.population = Population(self.population_size, self.environment)
 
     def run(self):
+        result_set = None
         for i in range(self.generation_nbr):
-            if self.begining_stop_condition(i):
+            if self.begining_stop_condition(i, result_set):
                 break
             self.population.generate()
             self.population.mutate(self.mutation_probability)
             self.population.select(self.retained_pct)
-            print(ResultSet(
-                **self.__dict__,
-                mean=self.population.mean,
-                best=self.environment.get_grade(self.population.best),
-                generation_num=i
-            ))
+            result_set = ResultSet(**self.__dict__, mean=self.population.mean,
+                                   best=self.environment.get_grade(self.population.best), generation_num=i)
+            print(result_set)
             # print(self.environment.get_grade(self.population.best))
-            if self.end_stop_condition(i):
+            if self.end_stop_condition(i, result_set):
                 break
-
-    def begining_stop_condition(self, index: int) -> bool:
-        return False
-
-    def end_stop_condition(self, index: int) -> bool:
-        return False
