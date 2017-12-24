@@ -1,1 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
+Supprimerait .idea/
+Supprimerait __pycache__/
+Supprimerait src/__pycache__/
+Supprimerait src/core/__pycache__/
+Supprimerait src/environnments/__pycache__/
+Supprimerait src/utils/__pycache__/
+Supprimerait trash/

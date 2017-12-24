@@ -57,7 +57,8 @@ class ShortestPathEnv(Environment):
 
     def mutate(self, chromosomes):
         i, n = random.randint(0, len(chromosomes) - 1), random.randint(0, len(chromosomes) - 1)
-        chromosomes[i], chromosomes[n] = chromosomes[n], chromosomes[i]
+        # chromosomes[i], chromosomes[n] = chromosomes[n], chromosomes[i]
+        random.shuffle(chromosomes)
         return chromosomes
 
     def mate(self, chromosome_1, chromosome_2):
