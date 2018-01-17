@@ -1,5 +1,5 @@
 from src.core.engine import Engine
-import src.environnments.shortest_path as sp
+import demo.shortest_path as sp
 
 
 def end_stop_condition(i, result_set):
