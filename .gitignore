@@ -6,3 +6,6 @@ Supprimerait src/core/__pycache__/
 Supprimerait src/environnments/__pycache__/
 Supprimerait src/utils/__pycache__/
 Supprimerait trash/
+/main.py
+Supprimerait demonstrations/__pycache__/
+Supprimerait demonstrations/shortest_path/__pycache__/

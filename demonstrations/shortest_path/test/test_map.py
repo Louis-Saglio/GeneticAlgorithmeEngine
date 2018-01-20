@@ -1,11 +1,11 @@
-from unittest import TestCase
+import unittest
 
-import src.environnement as env
+from gengine.demonstrations.shortest_path.shortest_path import Map
 
 
-class TestMap(TestCase):
+class TestMap(unittest.TestCase):
     def test_get_random_path(self):
-        mapa = env.Map(9, 20)
+        mapa = Map(9, 20)
         print(mapa)
         rp = mapa.get_random_path()
         print(rp.get_path_length())

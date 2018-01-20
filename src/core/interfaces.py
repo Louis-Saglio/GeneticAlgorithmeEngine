@@ -1,16 +1,16 @@
-from typing import List
+import typing
 
-from src.core.samples import Individu
+import src.core.samples as samples
 
 
 class Environment:
     def get_initial_chromosomes(self):
         raise NotImplementedError
 
-    def get_grade(self, individu: Individu) -> float:
+    def get_grade(self, individu: samples.Individu) -> float:
         raise NotImplementedError
 
-    def choose_mate(self, individu: Individu, population: List[Individu]) -> Individu:
+    def choose_mate(self, individu: samples.Individu, population: typing.List[samples.Individu]) -> samples.Individu:
         raise NotImplementedError
 
     def mate(self, chromosome_1, chromosome_2):

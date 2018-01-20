@@ -1,12 +1,12 @@
-from src.core.engine import Engine
-import demonstrations.shortest_path.shortest_path as sp
+import gengine.src.core.engine as core
+import gengine.demonstrations.shortest_path.shortest_path as sp
 
 
 def end_stop_condition(i, result_set):
     return float(result_set.best) < 0.001
 
 
-engine = Engine()
+engine = core.Engine()
 engine.environment = sp.ShortestPathEnv(sp.Map(9, 80))
 engine.population_size = 300
 engine.make_population()

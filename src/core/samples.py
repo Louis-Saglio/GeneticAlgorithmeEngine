@@ -1,7 +1,7 @@
 import random
-from copy import copy
+import copy
 
-from src.utils.utils import print_float
+import src.utils.utils as utils
 
 
 class Individu:
@@ -32,7 +32,7 @@ class Population:
 
     def _complete_size(self):
         while len(self.population) != self.nbr:
-            self.population.append(copy(random.choice(self.population)))
+            self.population.append(copy.copy(random.choice(self.population)))
 
     def select(self, percent_to_retain: float):
         nbr = self._get_item_number_by_percent(percent_to_retain)
@@ -71,10 +71,10 @@ class Population:
 class ResultSet:
     def __init__(self, **kwargs):
         self.pop = kwargs["population_size"]
-        self.best = print_float(kwargs["best"], 7)
-        self.moyenne = print_float(kwargs["mean"], 7)
-        self.conserve = print_float(float(kwargs["retained_pct"]), 4) + '%'
-        self.mutation = print_float(float(kwargs["mutation_probability"]) * 100, 4) + '%'
+        self.best = utils.print_float(kwargs["best"], 7)
+        self.moyenne = utils.print_float(kwargs["mean"], 7)
+        self.conserve = utils.print_float(float(kwargs["retained_pct"]), 4) + '%'
+        self.mutation = utils.print_float(float(kwargs["mutation_probability"]) * 100, 4) + '%'
         self.nbr_gen = kwargs["generation_nbr"]
         self.generation_num = kwargs["generation_num"]
 

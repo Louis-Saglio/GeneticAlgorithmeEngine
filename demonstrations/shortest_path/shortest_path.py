@@ -1,17 +1,17 @@
 import random
-from typing import List, Tuple
+import typing
 
-from src.core.interfaces import Environment
-from src.core.samples import Individu
+from gengine.src.core.interfaces import Environment
+from gengine.src.core.samples import Individu
 
 
 class Point:
 
     @staticmethod
-    def get_distances_between(a: Tuple[float, float], b: Tuple[float, float]):
+    def get_distances_between(a: typing.Tuple[float, float], b: typing.Tuple[float, float]):
         return ((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) ** (1/2)
 
-    def __init__(self, position: Tuple[float, float]):
+    def __init__(self, position: typing.Tuple[float, float]):
         self.position = position
 
     def __repr__(self):
@@ -63,8 +63,8 @@ class ShortestPathEnv(Environment):
 
     def mate(self, chromosome_1, chromosome_2):
         assert len(chromosome_1) == len(chromosome_2)
-        assert len(chromosome_1) % 2 == 0
+        assert len(chromosome_1) % 2 == 0, len(chromosome_1)
         return Path(chromosome_1[:int(len(chromosome_1) / 2)] + chromosome_2[:int(len(chromosome_2) / 2)])
 
-    def choose_mate(self, individu: Individu, population: List[Individu]) -> Individu:
+    def choose_mate(self, individu: Individu, population: typing.List[Individu]) -> Individu:
         return random.choice(population)
