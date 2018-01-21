@@ -1,7 +1,7 @@
 import random
 import copy
 
-import src.utils.utils as utils
+import gengine.src.utils.utils as utils
 
 
 class Individu:

@@ -56,7 +56,7 @@ class ShortestPathEnv(Environment):
         return self.map.get_random_path()
 
     def mutate(self, chromosomes):
-        i, n = random.randint(0, len(chromosomes) - 1), random.randint(0, len(chromosomes) - 1)
+        # i, n = random.randint(0, len(chromosomes) - 1), random.randint(0, len(chromosomes) - 1)
         # chromosomes[i], chromosomes[n] = chromosomes[n], chromosomes[i]
         random.shuffle(chromosomes)
         return chromosomes

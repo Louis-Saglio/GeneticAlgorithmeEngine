@@ -1,12 +1,12 @@
-import src.core.interfaces
-import src.core.samples as samples
+import gengine.src.core.interfaces as interfaces
+import gengine.src.core.samples as samples
 
 
 # noinspection PyMethodMayBeStatic,PyUnusedLocal
 class Engine:
 
     def __init__(self):
-        self.environment: src.core.interfaces.Environment = None
+        self.environment: interfaces.Environment = None
         self.population: samples.Population = None
         self.population_size: int = None
         self.mutation_probability: float = None
