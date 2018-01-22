@@ -1,5 +1,5 @@
-import gengine.src.core.interfaces as interfaces
-import gengine.src.core.samples as samples
+import gengine.src.interfaces as interfaces
+import gengine.src.samples as samples
 
 
 # noinspection PyMethodMayBeStatic,PyUnusedLocal

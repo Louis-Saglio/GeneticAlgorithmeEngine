@@ -1,6 +1,6 @@
 import typing
 
-import gengine.src.core.samples as samples
+import gengine.src.samples as samples
 
 
 class Environment:

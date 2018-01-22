@@ -2,7 +2,7 @@ import random
 import typing
 
 from gengine.src.core.interfaces import Environment
-from gengine.src.core.samples import Individu
+from gengine.src.samples import Individu
 
 
 class Point:

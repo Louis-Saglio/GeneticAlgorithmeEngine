@@ -1,4 +1,4 @@
-import gengine.src.core.engine as core
+import gengine.src.engine as core
 import gengine.demonstrations.shortest_path.shortest_path as sp
 
 
