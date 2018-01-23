@@ -1,16 +1,11 @@
-import typing
-
-import gengine
-
-
 class Environment:
     def get_initial_chromosomes(self):
         raise NotImplementedError
 
-    def get_grade(self, individu: gengine._Individu) -> float:
+    def get_grade(self, individu) -> float:
         raise NotImplementedError
 
-    def choose_mate(self, individu: gengine._Individu, population: typing.List[gengine._Individu]) -> gengine._Individu:
+    def choose_mate(self, individu, population):
         raise NotImplementedError
 
     def mate(self, chromosome_1, chromosome_2):
