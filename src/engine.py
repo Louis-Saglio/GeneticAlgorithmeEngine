@@ -23,8 +23,11 @@ class Engine:
         assert self.population_size >= 0
         self.population = samples.Population(self.population_size, self.environment)
 
-    def run(self):
+    def run(self, log=True):
+        result = []
         result_set = None
+        if log:
+            print(samples.ResultSet.get_header())
         for i in range(self.generation_nbr):
             if self.begining_stop_condition(i, result_set):
                 break
@@ -37,6 +40,9 @@ class Engine:
                 best=self.environment.get_grade(self.population.best.chromosomes),
                 generation_num=i
             )
-            print(result_set)
+            result.append(result_set)
+            if log:
+                print(result_set)
             if self.end_stop_condition(i, result_set):
                 break
+        return result

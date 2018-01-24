@@ -70,17 +70,16 @@ class Population:
 
 
 class ResultSet:
+    header = ("population_size", "best", "mean", "retained_pct", "mutation_probability", "generation_nbr", "generation_num")
+    column_size = 25
+
     def __init__(self, **kwargs):
-        self.pop = kwargs["population_size"]
-        self.best = utils.print_float(kwargs["best"], 7)
-        self.moyenne = utils.print_float(kwargs["mean"], 7)
-        self.conserve = utils.print_float(float(kwargs["retained_pct"]), 4) + '%'
-        self.mutation = utils.print_float(float(kwargs["mutation_probability"]) * 100, 4) + '%'
-        self.nbr_gen = kwargs["generation_nbr"]
-        self.generation_num = kwargs["generation_num"]
+        for key in self.header:
+            self.__dict__[key] = kwargs[key]
+
+    @staticmethod
+    def get_header():
+        return ''.join(key.ljust(ResultSet.column_size)[:ResultSet.column_size] for key in ResultSet.header)
 
     def __repr__(self):
-        rep = str()
-        for value in self.__dict__.values():
-            rep += f"{value}\t"
-        return rep
+        return ''.join(str(getattr(self, key)).ljust(ResultSet.column_size)[:ResultSet.column_size] for key in ResultSet.header)
