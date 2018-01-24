@@ -70,7 +70,7 @@ class Population:
 
 
 class ResultSet:
-    header = ("population_size", "best", "mean", "retained_pct", "mutation_probability", "generation_nbr", "generation_num")
+    header = ("population_size", "best", "mean", "retained_pct", "mutation_probability", "generation_nbr", "generation_num", "answer")
     column_size = 25
 
     def __init__(self, **kwargs):

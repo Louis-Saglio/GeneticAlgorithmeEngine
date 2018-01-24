@@ -38,7 +38,8 @@ class Engine:
                 **self.__dict__,
                 mean=self.population.mean,
                 best=self.environment.get_grade(self.population.best.chromosomes),
-                generation_num=i
+                generation_num=i,
+                answer=self.population.best.chromosomes
             )
             result.append(result_set)
             if log:
