@@ -14,6 +14,7 @@ engine.retained_pct = 75
 engine.generation_nbr = 1000
 engine.mutation_probability = 0.8
 engine.end_stop_condition = end_stop_condition
+engine.best_is = core.Engine.LARGEST
 engine.run()
 
 # todo améliorer l'environnement

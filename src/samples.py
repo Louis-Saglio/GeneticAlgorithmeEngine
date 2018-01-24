@@ -34,11 +34,12 @@ class Population:
         while len(self.population) != self.nbr:
             self.population.append(copy.copy(random.choice(self.population)))
 
-    def select(self, percent_to_retain: float):
+    def select(self, percent_to_retain: float, best_is: bool):
         nbr = self._get_item_number_by_percent(percent_to_retain)
         self.population = sorted(
             self.population,
-            key=lambda individu: self.environment.get_grade(individu.chromosomes)
+            key=lambda individu: self.environment.get_grade(individu.chromosomes),
+            reverse=best_is
         )[:nbr]
         self._complete_size()
 

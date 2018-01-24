@@ -5,6 +5,9 @@ import gengine.src.samples as samples
 # noinspection PyMethodMayBeStatic,PyUnusedLocal
 class Engine:
 
+    SMALLEST = False
+    LARGEST = True
+
     def __init__(self):
         self.environment: interfaces.Environment = None
         self.population: samples.Population = None
@@ -14,6 +17,7 @@ class Engine:
         self.generation_nbr: int = None
         self.begining_stop_condition = lambda i, result_set: False
         self.end_stop_condition = lambda i, result_set: False
+        self.best_is = None
 
     def make_population(self):
         assert self.population_size >= 0
@@ -26,10 +30,13 @@ class Engine:
                 break
             self.population.generate()
             self.population.mutate(self.mutation_probability)
-            self.population.select(self.retained_pct)
-            result_set = samples.ResultSet(**self.__dict__, mean=self.population.mean,
-                                           best=self.environment.get_grade(self.population.best.chromosomes), generation_num=i)
+            self.population.select(self.retained_pct, self.best_is)
+            result_set = samples.ResultSet(
+                **self.__dict__,
+                mean=self.population.mean,
+                best=self.environment.get_grade(self.population.best.chromosomes),
+                generation_num=i
+            )
             print(result_set)
-            # print(self.environment.get_grade(self.population.best))
             if self.end_stop_condition(i, result_set):
                 break
