@@ -28,7 +28,7 @@ class Engine:
             self.population.mutate(self.mutation_probability)
             self.population.select(self.retained_pct)
             result_set = samples.ResultSet(**self.__dict__, mean=self.population.mean,
-                                           best=self.environment.get_grade(self.population.best), generation_num=i)
+                                           best=self.environment.get_grade(self.population.best.chromosomes), generation_num=i)
             print(result_set)
             # print(self.environment.get_grade(self.population.best))
             if self.end_stop_condition(i, result_set):

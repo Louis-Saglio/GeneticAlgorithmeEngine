@@ -38,7 +38,7 @@ class Population:
         nbr = self._get_item_number_by_percent(percent_to_retain)
         self.population = sorted(
             self.population,
-            key=lambda individu: self.environment.get_grade(individu)
+            key=lambda individu: self.environment.get_grade(individu.chromosomes)
         )[:nbr]
         self._complete_size()
 
@@ -46,22 +46,22 @@ class Population:
         new_pop = []
         for individu in self.population:
             new_pop.append(
-                Individu(self.environment.mate(individu.chromosomes, self._choose_mate(individu).chromosomes))
+                Individu(self.environment.mate(individu.chromosomes, self._choose_mate().chromosomes))
             )
         self.population = new_pop
 
-    def _choose_mate(self, individu: Individu) -> Individu:
-        return self.environment.choose_mate(individu, self.population)
+    def _choose_mate(self) -> Individu:
+        return random.choice(self.population)
 
     @property
     def mean(self):
-        return sum([self.environment.get_grade(individu) for individu in self.population]) / len(self.population)
+        return sum([self.environment.get_grade(individu.chromosomes) for individu in self.population]) / len(self.population)
 
     @property
     def best(self):
         return sorted(
             self.population,
-            key=lambda individu: self.environment.get_grade(individu)
+            key=lambda individu: self.environment.get_grade(individu.chromosomes)
         )[0]
 
     def __repr__(self):

@@ -1,8 +1,7 @@
 import random
 import typing
 
-from gengine.src.core.interfaces import Environment
-from gengine.src.samples import Individu
+from gengine import Environment
 
 
 class Point:
@@ -49,15 +48,13 @@ class ShortestPathEnv(Environment):
     def __init__(self, map_: Map):
         self.map = map_
 
-    def get_grade(self, individu: Individu) -> float:
-        return individu.chromosomes.get_path_length()
+    def get_grade(self, chromosomes) -> float:
+        return chromosomes.get_path_length()
 
     def get_initial_chromosomes(self):
         return self.map.get_random_path()
 
     def mutate(self, chromosomes):
-        # i, n = random.randint(0, len(chromosomes) - 1), random.randint(0, len(chromosomes) - 1)
-        # chromosomes[i], chromosomes[n] = chromosomes[n], chromosomes[i]
         random.shuffle(chromosomes)
         return chromosomes
 
@@ -65,6 +62,3 @@ class ShortestPathEnv(Environment):
         assert len(chromosome_1) == len(chromosome_2)
         assert len(chromosome_1) % 2 == 0, len(chromosome_1)
         return Path(chromosome_1[:int(len(chromosome_1) / 2)] + chromosome_2[:int(len(chromosome_2) / 2)])
-
-    def choose_mate(self, individu: Individu, population: typing.List[Individu]) -> Individu:
-        return random.choice(population)
