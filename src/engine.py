@@ -43,12 +43,16 @@ class Engine:
         if log:
             print(samples.ResultSet.get_header())
         for i in range(self.generation_nbr):
-            if self.begining_stop_condition(i, result_set):
-                break
-            result_set = self.live(log)
-            result.append(result_set)
-            if log:
-                print(result_set)
-            if self.end_stop_condition(i, result_set):
-                break
+            try:
+                if self.begining_stop_condition(i, result_set):
+                    break
+                result_set = self.live(log)
+                result.append(result_set)
+                if log:
+                    print(result_set)
+                if self.end_stop_condition(i, result_set):
+                    break
+            except KeyboardInterrupt:
+                print("Keyboard Interrupt")
+                exit(0)
         return result
