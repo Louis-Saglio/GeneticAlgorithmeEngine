@@ -18,10 +18,24 @@ class Engine:
         self.begining_stop_condition = lambda i, result_set: False
         self.end_stop_condition = lambda i, result_set: False
         self.best_is = None
+        self.processed_generation_nbr = 0
 
     def make_population(self):
         assert self.population_size >= 0
         self.population = samples.Population(self.population_size, self.environment)
+
+    def live(self, log):
+        self.population.generate()
+        self.population.mutate(self.mutation_probability)
+        self.population.select(self.retained_pct, self.best_is)
+        self.processed_generation_nbr += 1
+        return samples.ResultSet(
+            **self.__dict__,
+            mean=self.population.mean,
+            best=self.environment.get_grade(self.population.best.chromosomes),
+            generation_num=self.processed_generation_nbr,
+            answer=self.population.best.chromosomes
+        )
 
     def run(self, log=True):
         result = []
@@ -31,16 +45,7 @@ class Engine:
         for i in range(self.generation_nbr):
             if self.begining_stop_condition(i, result_set):
                 break
-            self.population.generate()
-            self.population.mutate(self.mutation_probability)
-            self.population.select(self.retained_pct, self.best_is)
-            result_set = samples.ResultSet(
-                **self.__dict__,
-                mean=self.population.mean,
-                best=self.environment.get_grade(self.population.best.chromosomes),
-                generation_num=i,
-                answer=self.population.best.chromosomes
-            )
+            result_set = self.live(log)
             result.append(result_set)
             if log:
                 print(result_set)
